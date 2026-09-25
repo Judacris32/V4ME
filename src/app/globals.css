@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Enable class-based dark mode (driven by next-themes toggling .dark on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #101915;
+  --surface: #ffffff;
+  --surface-muted: #f4f7f5;
+  --border-subtle: #e4ebe6;
+}
+
+.dark {
+  /* Re-tinted around oklch(62.7% 0.194 149.214) — the brand's vivid green —
+   * instead of a near-black neutral. Same hue family as before, but with
+   * real chroma and a touch more lightness so dark mode reads as a rich
+   * green rather than flat black. See --color-glow-500 below for the full
+   * vivid tone, used sparingly as a glow/accent on permanently-dark bands. */
+  --background: oklch(21% 0.05 149.214);
+  --foreground: oklch(97% 0.01 149.214);
+  --surface: oklch(25% 0.055 149.214);
+  --surface-muted: oklch(29% 0.06 149.214);
+  --border-subtle: oklch(36% 0.07 149.214);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border-subtle: var(--border-subtle);
+
+  --font-sans: "Manrope Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* Primary — Deep Forest Green */
+  --color-primary-50: #f4f7f5;
+  --color-primary-100: #e4ebe6;
+  --color-primary-200: #c0d0c5;
+  --color-primary-300: #98b1a0;
+  --color-primary-400: #62896f;
+  --color-primary-500: #1e5631;
+  --color-primary-600: #1a4a2a;
+  --color-primary-700: #153c22;
+  --color-primary-800: #112f1b;
+  --color-primary-900: #0d2415;
+  --color-primary-950: #08180e;
+
+  /* Accent — Vibrant Orange */
+  --color-accent-50: #fefaf6;
+  --color-accent-100: #fdf3e9;
+  --color-accent-200: #fbe2cc;
+  --color-accent-300: #f9d0ac;
+  --color-accent-400: #f6b880;
+  --color-accent-500: #f2994a;
+  --color-accent-600: #d08440;
+  --color-accent-700: #a96b34;
+  --color-accent-800: #855429;
+  --color-accent-900: #66401f;
+  --color-accent-950: #442b15;
+
+  /* Secondary — Ocean Blue */
+  --color-secondary-50: #f5fafd;
+  --color-secondary-100: #e6f3fb;
+  --color-secondary-200: #c4e3f5;
+  --color-secondary-300: #9ed1ee;
+  --color-secondary-400: #6cbae6;
+  --color-secondary-500: #2d9cdb;
+  --color-secondary-600: #2786bc;
+  --color-secondary-700: #206d99;
+  --color-secondary-800: #195678;
+  --color-secondary-900: #13425c;
+  --color-secondary-950: #0d2c3d;
+
+  /* Nav — vivid lime, oklch(76.8% 0.233 130.85). Used as the navbar's own
+   * fixed brand color (always this color, in both light and dark site
+   * theme) — bright enough that it always needs dark text/icons on top of
+   * it, never white. */
+  --color-nav-400: oklch(93% 0.12 130.85);
+  --color-nav-500: oklch(76.8% 0.233 130.85);
+  --color-nav-600: oklch(68% 0.22 130.85);
+
+  /* Apricot — warm peach-orange, oklch(83.7% 0.128 66.29). Used as the
+   * fixed background of the "Our Work" intro card (always this color, in
+   * both light and dark site theme) — light enough that it always needs
+   * dark text/icons on top of it, never white. */
+  --color-apricot-500: oklch(83.7% 0.128 66.29);
+
+  /* Glow — vivid grass green, oklch(62.7% 0.194 149.214). Used sparingly as
+   * a glow/accent on permanently-dark bands (CTA band, hero, dark section
+   * gradients) — not a general button color, since white text on the 500
+   * tone falls short of AA contrast at small sizes. */
+  --color-glow-400: oklch(72% 0.17 149.214);
+  --color-glow-500: oklch(62.7% 0.194 149.214);
+  --color-glow-600: oklch(54% 0.16 149.214);
+
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+* {
+  border-color: var(--border-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-accent-300);
+  color: var(--color-primary-950);
+}
+
+/* Focus ring consistent across interactive elements */
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Slim, brand-colored scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface-muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-300);
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-primary-700);
+}
